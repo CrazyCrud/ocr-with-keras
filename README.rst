@@ -11,6 +11,9 @@ Description
 
 No layout segmentation is down in this project...
 
+- [ ] Tests
+- [ ] GPU support
+- [ ] Post-correction
 
 Note
 ====
