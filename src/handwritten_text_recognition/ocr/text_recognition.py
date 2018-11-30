@@ -1,7 +1,6 @@
 import numpy as np
 from src.handwritten_text_recognition.config import get_path_to_model_dir_in_assets
 from src.handwritten_text_recognition.ocr.model_container import ModelContainer
-from src.handwritten_text_recognition.ocr.train.data_generator import DataGenerator
 import src.handwritten_text_recognition.ocr.text_preprocessing as text_preprocessing
 
 
@@ -14,7 +13,6 @@ class TextRecognition(object):
             }
 
             self.model_container = ModelContainer()
-            self.data_generator = DataGenerator()
 
             self._load_model(model_name)
 
@@ -31,7 +29,7 @@ class TextRecognition(object):
             batch_images[0, 0:self.model_data['line_width_padded'], :, 0] = image_array
 
             if self.model_container.model is not None:
-                self.model_container.predict(batch_images, self.data_generator)
+                self.model_container.predict(batch_images)
             else:
                 print("No model was chosen")
 

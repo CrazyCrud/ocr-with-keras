@@ -1,12 +1,13 @@
 import keras.callbacks
-import numpy
+import numpy as np
 from src.handwritten_text_recognition.file_manager.file_loader import FileLoader
-import src.handwritten_text_recognition.ocr.text_recognition.text_preprocessing as text_preprocessing
+import src.handwritten_text_recognition.ocr.text_preprocessing as text_preprocessing
 
 
 class DataGenerator(keras.callbacks.Callback):
     def __init__(self, downsample_factor=2 ** 2, line_width_padded=535,
                  line_height_normalized=64, max_string_length=7):
+        super().__init__()
 
         self.downsample_factor = downsample_factor
 
@@ -97,7 +98,7 @@ class DataGenerator(keras.callbacks.Callback):
             y_train_label = self._process_label(image_label)
 
             single_label_length = len(image_label)
-            single_label_length = numpy.array([single_label_length])
+            single_label_length = np.array([single_label_length])
 
             batch_images[i, 0:self.line_width_padded, :, 0] = x_train_image
             batch_labels[i, 0:len(image_label)] = y_train_label
@@ -111,7 +112,7 @@ class DataGenerator(keras.callbacks.Callback):
                   'label_length': label_length,
                   'target_strings': target_strings
                   }
-        outputs = {'ctc': numpy.zeros([self.batch_size])}  # dummy data for dummy loss function
+        outputs = {'ctc': np.zeros([self.batch_size])}  # dummy data for dummy loss function
         return inputs, outputs
 
     def _get_batch_for_prediction(self, image, batch_size):
@@ -127,7 +128,7 @@ class DataGenerator(keras.callbacks.Callback):
             y_label = self._process_label(image_label)
 
             single_label_length = len(image_label)
-            single_label_length = numpy.array([single_label_length])
+            single_label_length = np.array([single_label_length])
 
             batch_images[i, 0:self.line_width_padded, :, 0] = x_image
             batch_labels[i, 0:len(image_label)] = y_label
@@ -140,14 +141,14 @@ class DataGenerator(keras.callbacks.Callback):
                   'input_length': input_length,
                   'label_length': label_length
                   }
-        outputs = {'ctc': numpy.zeros([batch_size])}  # dummy data for dummy loss function
+        outputs = {'ctc': np.zeros([batch_size])}  # dummy data for dummy loss function
         return inputs, outputs
 
     def _bootstrap_model_input(self, batch_size):
-        batch_images = numpy.ones([batch_size, self.line_width_padded, self.line_height_normalized, 1])
-        batch_labels = numpy.ones([batch_size, self.max_string_length]) * -1
-        input_length = numpy.zeros([batch_size, 1])
-        label_length = numpy.zeros([batch_size, 1])
+        batch_images = np.ones([batch_size, self.line_width_padded, self.line_height_normalized, 1])
+        batch_labels = np.ones([batch_size, self.max_string_length]) * -1
+        input_length = np.zeros([batch_size, 1])
+        label_length = np.zeros([batch_size, 1])
 
         return batch_images, batch_labels, input_length, label_length
 
@@ -180,10 +181,10 @@ class DataGenerator(keras.callbacks.Callback):
                     we will have to change the model to fit in more characters, also,
                     other characters are all too rare in training data for now.'''
                     ret.append(number_offset + lower_case_offset + upper_case_offset + 4)
-            return numpy.array(ret)
+            return np.array(ret)
         except Exception:
             ret.append(number_offset + lower_case_offset + upper_case_offset + 4)
-            return numpy.array(ret)
+            return np.array(ret)
 
     def _shuffle_data(self, x_data, y_data, stop_index=None):
         data_length = len(self.image_paths)
@@ -192,15 +193,15 @@ class DataGenerator(keras.callbacks.Callback):
         assert stop_index <= data_length
 
         a = list(range(stop_index))
-        numpy.random.shuffle(a)
+        np.random.shuffle(a)
         a += list(range(stop_index, data_length))  # add unshuffled validation indices
 
-        if isinstance(x_data, numpy.ndarray):
+        if isinstance(x_data, np.ndarray):
             x_data = x_data[a]
         elif isinstance(x_data, list):
             x_data = [x_data[i] for i in a]
 
-        if isinstance(y_data, numpy.ndarray):
+        if isinstance(y_data, np.ndarray):
             y_data = y_data[a]
         elif isinstance(y_data, list):
             y_data = [y_data[i] for i in a]

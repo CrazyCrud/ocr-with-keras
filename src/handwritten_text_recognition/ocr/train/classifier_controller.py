@@ -1,4 +1,6 @@
 from keras import backend as KerasBackend
+import matplotlib
+matplotlib.use("agg")
 import matplotlib.pyplot as plt
 from src.handwritten_text_recognition.file_manager.file_loader import FileLoader
 from src.handwritten_text_recognition.ocr.train.setup_trainings_data import SetupTrainingsData
@@ -18,7 +20,7 @@ class Classifier:
 
         KerasBackend.set_image_data_format('channels_last')
 
-    def load_dataset(self, dataset_type=DATASET_TYP['mnist']):
+    def load_dataset(self, dataset_type=DATASET_TYP['cvl']):
         database = None
         if dataset_type == Classifier.DATASET_TYP['iam']:
             database = SetupTrainingsData.get_database_by_name("iam")

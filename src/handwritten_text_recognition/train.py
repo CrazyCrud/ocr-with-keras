@@ -51,6 +51,9 @@ def run(batch_size, epochs, memory_units, pool_size, charset, line_width_padded,
 
 
 if __name__ == '__main__':
-    sys.path.insert(0, os.path.abspath("../.."))
+    head, tail = os.path.split(os.path.join(os.path.abspath(__file__)))
+    PACKAGE_DIR = os.path.join(head, '..{}..{}'.format(os.sep, os.sep))
+
+    sys.path.insert(0, PACKAGE_DIR)
 
     ex_images.run_commandline()
