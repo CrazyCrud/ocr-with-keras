@@ -1,15 +1,15 @@
 ============================
-handwritten_text_recognition
+OCR with Keras
 ============================
 
 
-Add a short description here!
+This project shows a simple (and unfinished) example of using Keras to recognize text in digitized documents.
 
 
 Description
 ===========
 
-A longer description of your project goes here...
+No layout segmentation is down in this project...
 
 
 Note
