@@ -1,3 +1,6 @@
+# Specific files
+src/handwritten_text_recognition/assets
+
 # Temporary and binary files
 *~
 *.py[cod]

@@ -1,7 +1,8 @@
-# Add your pinned requirements so that they can be easily installed with:
-# pip install -r requirements.txt
-# Remember to also add them in setup.cfg but unpinned.
-# Example:
-# numpy==1.13.3
-# scipy==1.0
-
+matplotlib==2.2.0
+setuptools==38.5.2
+editdistance==0.4
+numpy==1.14.2
+opencv_contrib_python==3.4.0.12
+sacred==0.7.3
+Keras==2.1.5
+atlas==0.27.0
