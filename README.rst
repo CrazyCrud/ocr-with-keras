@@ -9,9 +9,9 @@ This project shows a simple (and unfinished) example of using Keras to recognize
 Description
 ===========
 
-You can download the CVL-Database [here](https://cvl.tuwien.ac.at/research/cvl-databases/icdar2013-handwritten-digit-and-digit-string-recognition-competition/).
+You can download the CVL-Dataset here: https://cvl.tuwien.ac.at/research/cvl-databases/icdar2013-handwritten-digit-and-digit-string-recognition-competition/
 
-Unpack the images in _/handwritten_text_recognition/assets/cvl_dataset_
+Unpack the images in */handwritten_text_recognition/assets/cvl_dataset*
 
 No layout segmentation is down in this project...
 
