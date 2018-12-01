@@ -13,6 +13,9 @@ You can download the CVL-Dataset here: https://cvl.tuwien.ac.at/research/cvl-dat
 
 Unpack the images in */handwritten_text_recognition/assets/cvl_dataset*
 
+In the project root folder run: 
+``python src/handwritten_text_recognition/train.py``
+
 No layout segmentation is down in this project...
 
 - [ ] Tests
