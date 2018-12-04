@@ -16,6 +16,8 @@ class SetupTrainingsData(object):
             return IamDatabase()
         elif database_name == "cvl":
             return CvlDatabase()
+        else:
+            return TextLines(database_name)
 
 
 class IamDatabase(SetupTrainingsData):
@@ -95,3 +97,25 @@ class CvlDatabase(SetupTrainingsData):
             head, tail = os.path.split(image_path)
             image_labels.append(tail[:tail.find('-')])
         return image_paths, image_labels
+
+
+class TextLines(SetupTrainingsData):
+    def __init__(self, path_to_training_samples):
+        self.path_to_images = path_to_training_samples
+        self.path_to_labels = path_to_training_samples
+
+        self.image_file_extension = '.png'
+
+    def get_dataset(self):
+        image_paths = glob(os.path.join(self.path_to_images, '*.{}'.format(self.image_file_extension)))
+        label_paths = glob(os.path.join(self.path_to_labels + '*.txt'))
+
+        assert len(image_paths) == len(label_paths)
+
+        labels = []
+
+        for label_path in label_paths:
+            file = open(label_path, 'r', encoding='utf-8')
+            labels.append(file.read())
+
+        return image_paths, labels

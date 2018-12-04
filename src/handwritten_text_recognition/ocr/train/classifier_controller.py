@@ -20,12 +20,15 @@ class Classifier:
 
         KerasBackend.set_image_data_format('channels_last')
 
-    def load_dataset(self, dataset_type=DATASET_TYP['cvl']):
+    def load_dataset(self, dataset=DATASET_TYP['cvl']):
         database = None
-        if dataset_type == Classifier.DATASET_TYP['iam']:
+        if dataset == Classifier.DATASET_TYP['iam']:
             database = SetupTrainingsData.get_database_by_name("iam")
-        elif dataset_type == Classifier.DATASET_TYP['cvl']:
+        elif dataset == Classifier.DATASET_TYP['cvl']:
             database = SetupTrainingsData.get_database_by_name("cvl")
+        else:
+            database = SetupTrainingsData.get_database_by_name(dataset)
+
         if database:
             return database.get_dataset()
         else:

@@ -19,9 +19,11 @@ def default_config():
 
     force_new = True
 
+    training_samples = None
+
 
 @ex_images.main
-def run(batch_size, epochs, memory_units, pool_size, charset, line_width_padded, line_height_normalized,
+def run(training_samples, batch_size, epochs, memory_units, pool_size, charset, line_width_padded, line_height_normalized,
         max_string_length, force_new):
     from src.handwritten_text_recognition.ocr.train.classifier_controller import Classifier
     from src.handwritten_text_recognition.ocr.train.data_generator import DataGenerator
@@ -29,7 +31,15 @@ def run(batch_size, epochs, memory_units, pool_size, charset, line_width_padded,
     from src.handwritten_text_recognition.config import get_path_to_model_dir_in_assets
 
     classifier = Classifier()
-    image_paths, image_labels = classifier.load_dataset(Classifier.DATASET_TYP['cvl'])
+
+    image_paths = None
+    image_labels = None
+
+    if training_samples is None:
+        image_paths, image_labels = classifier.load_dataset(Classifier.DATASET_TYP['cvl'])
+    else:
+        image_paths, image_labels = classifier.load_dataset(training_samples)
+
     generator = DataGenerator(downsample_factor=(pool_size ** 2),
                               line_width_padded=line_width_padded,
                               line_height_normalized=line_height_normalized, max_string_length=max_string_length)
