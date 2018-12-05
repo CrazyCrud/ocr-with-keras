@@ -25,7 +25,7 @@ Training with custom dataset
 ----
 
 Be careful that the images and the corresponding ground truth are located in the same folder.
-The ground truth should have the filename of the corresponding image and the *.txt*-extension.
+The ground truth should be named according to the corresponding image and should have the *.txt*-extension.
 
 ```python
 python src/handwritten_text_recognition/train.py with folder_containing_training_samples
