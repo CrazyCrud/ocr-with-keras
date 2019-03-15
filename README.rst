@@ -35,7 +35,7 @@ Predict unseen text
 ----
 
 You can use the following function to predict text:
-The module 'src/handwritten_text_recognition/ocr/text_recognition.py' contains a function called 'recognize_text' which takes a line image and predicts the text.
+The module *src/handwritten_text_recognition/ocr/text_recognition.py* contains a function called *recognize_text* which takes a line image and predicts the text.
 
 
 To-Do
