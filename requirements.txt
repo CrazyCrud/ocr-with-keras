@@ -1,5 +1,5 @@
 matplotlib==2.2.3
-setuptools==38.5.2
+setuptools==65.5.1
 editdistance==0.4
 numpy==1.15.4
 opencv_contrib_python==4.2.0.32
